@@ -7,14 +7,14 @@ import Rocket from "../components/Rocket";
 import logo from "../assets/spacex-logo.svg";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
-export default function Home({ launch }) {
+export default function Home({ loading, data: { launch } }) {
   return (
     <div className={styles.container}>
       <Image src={logo} alt="SpaceX Logo" height={20} />
-      {launch?.launch_date_utc ? (
+      {!loading ? (
         <>
-          {launch.rocket !== "" ? (
-            <CountdownTimer date={launch.launch_date_utc} />
+          {launch.upcoming ? (
+            <CountdownTimer date={launch.date} />
           ) : (
             "No upcoming launches"
           )}
@@ -25,7 +25,7 @@ export default function Home({ launch }) {
           <div className={styles.missionInfo}>
             <p className={styles.missionName}>{launch.name}</p>
             <p className={styles.missionFlight}>
-              Flight Number {launch.flight_number}
+              Flight Number {launch.flightNumber}
             </p>
           </div>
         </>
@@ -38,19 +38,19 @@ export default function Home({ launch }) {
 
 export async function getStaticProps() {
   const client = new ApolloClient({
-    uri: "https://api.spacex.land/graphql/",
+    uri: "http://localhost:4000/",
     cache: new InMemoryCache(),
   });
 
-  const { data } = await client.query({
+  const { data, loading, error } = await client.query({
     query: gql`
-      query getNextLaunch {
-        launchNext {
-          launch_date_utc
-          mission_name
-          rocket {
-            rocket_name
-          }
+      query Query {
+        launch {
+          upcoming
+          rocket
+          date
+          name
+          flightNumber
         }
       }
     `,
@@ -58,7 +58,8 @@ export async function getStaticProps() {
 
   return {
     props: {
-      launch: data.launchNext,
+      loading,
+      data,
     },
   };
 }
