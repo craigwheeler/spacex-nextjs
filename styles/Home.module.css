@@ -1,25 +1,22 @@
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-}
-
-.main {
-  padding: 5rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  color: #999;
+  background-color: #000;
+  background: radial-gradient(
+    56.04% 44.43% at 50% 100%,
+    rgb(22, 22, 22) 0%,
+    rgb(0, 0, 0) 100%
+  );
 }
 
 .footer {
   width: 100%;
   height: 100px;
-  border-top: 1px solid #eaeaea;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,7 +60,7 @@
 }
 
 .code {
-  background: #fafafa;
+  background: #000;
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;
@@ -120,4 +117,50 @@
     width: 100%;
     flex-direction: column;
   }
+}
+
+/* custom styles */
+
+.view {
+  display: flex;
+}
+
+.missionInfo {
+  text-align: center;
+  color: #999;
+}
+
+.missionName {
+  font-size: 20px;
+  margin: 5px;
+}
+.missionFlight {
+  font-size: 12px;
+  margin: 0;
+}
+
+.timerContainer {
+  display: flex;
+  justify-content: space-evenly;
+  height: fit-content;
+  max-width: 500px;
+  width: 100%;
+  color: #fff;
+}
+
+.time {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 200;
+  margin: 10px;
+}
+
+.value {
+  font-size: 50px;
+}
+
+.unit {
+  font-size: 16px;
 }
