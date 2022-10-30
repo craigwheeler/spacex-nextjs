@@ -5,22 +5,16 @@ import CountdownTimer from "../components/CountdownTimer";
 import Image from "next/image";
 import Rocket from "../components/Rocket";
 import logo from "../assets/spacex-logo.svg";
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
-export default function Home() {
-  const [launch, setLaunch] = useState({
-    rocket: "5e9d0d96eda699382d09d1ee",
-    date_utc: "2022-11-01T16:00:00.000Z",
-    name: "Crew-5",
-    flight_number: "187",
-  });
-
+export default function Home({ launch }) {
   return (
     <div className={styles.container}>
       <Image src={logo} alt="SpaceX Logo" height={20} />
-      {launch.flight_number ? (
+      {launch?.launch_date_utc ? (
         <>
           {launch.rocket !== "" ? (
-            <CountdownTimer date={launch.date_utc} />
+            <CountdownTimer date={launch.launch_date_utc} />
           ) : (
             "No upcoming launches"
           )}
@@ -40,4 +34,31 @@ export default function Home() {
       )}
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const client = new ApolloClient({
+    uri: "https://api.spacex.land/graphql/",
+    cache: new InMemoryCache(),
+  });
+
+  const { data } = await client.query({
+    query: gql`
+      query getNextLaunch {
+        launchNext {
+          launch_date_utc
+          mission_name
+          rocket {
+            rocket_name
+          }
+        }
+      }
+    `,
+  });
+
+  return {
+    props: {
+      launch: data.launchNext,
+    },
+  };
 }
