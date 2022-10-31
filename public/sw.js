@@ -67,12 +67,12 @@ if (!self.define) {
     });
   };
 }
-define(['./workbox-4f8e275e', '../../../../../../../Users/craigwheeler/code/nextjs/nextspacexlaunchtime/node_modules/workbox-strategies/NetworkFirst.mjs', '../../../../../../../Users/craigwheeler/code/nextjs/nextspacexlaunchtime/node_modules/workbox-strategies/NetworkOnly.mjs'], (function (workbox, NetworkFirst_mjs, NetworkOnly_mjs) { 'use strict';
+define(['./workbox-327c579b'], (function (workbox) { 'use strict';
 
   importScripts();
   self.skipWaiting();
   workbox.clientsClaim();
-  workbox.registerRoute("/", new NetworkFirst_mjs.NetworkFirst({
+  workbox.registerRoute("/", new workbox.NetworkFirst({
     "cacheName": "start-url",
     plugins: [{
       cacheWillUpdate: async ({
@@ -92,7 +92,7 @@ define(['./workbox-4f8e275e', '../../../../../../../Users/craigwheeler/code/next
       }
     }]
   }), 'GET');
-  workbox.registerRoute(/.*/i, new NetworkOnly_mjs.NetworkOnly({
+  workbox.registerRoute(/.*/i, new workbox.NetworkOnly({
     "cacheName": "dev",
     plugins: []
   }), 'GET');
