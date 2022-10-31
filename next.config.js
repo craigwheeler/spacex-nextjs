@@ -5,14 +5,4 @@ const withPWA = require("next-pwa")({
 
 module.exports = withPWA({
   // config
-  images: {
-    remotePatterns: [
-      {
-        protocol: "http",
-        hostname: "localhost",
-        port: "3000",
-        pathname: "",
-      },
-    ],
-  },
 });
