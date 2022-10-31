@@ -10,7 +10,18 @@ import { RestLink } from "apollo-link-rest";
 
 const restLink = new RestLink({ uri: "https://api.spacexdata.com/v4/" });
 
-export default function Home({ data: { launch } }) {
+type LaunchType = {
+  data: {
+    launch: {
+      name: string;
+      date_utc: string;
+      rocket: string;
+      flight_number: number;
+    };
+  };
+};
+
+export default function Home({ data: { launch } }: LaunchType): JSX.Element {
   return (
     <div className={styles.container}>
       <Image src={logo} alt="SpaceX Logo" height={20} />
