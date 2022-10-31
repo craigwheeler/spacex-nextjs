@@ -31,6 +31,10 @@ const server = new ApolloServer({
   resolvers,
 });
 
-server.listen().then(({ url }) => console.log(`server is running at ${url}`));
+server
+  .listen()
+  .then(({ url }: { url: string }) =>
+    console.log(`server is running at ${url}`)
+  );
 
 export {};
