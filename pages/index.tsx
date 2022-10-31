@@ -6,15 +6,18 @@ import Image from "next/image";
 import Rocket from "../components/Rocket";
 import logo from "../assets/spacex-logo.svg";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import { RestLink } from "apollo-link-rest";
 
-export default function Home({ loading, data: { launch } }) {
+const restLink = new RestLink({ uri: "https://api.spacexdata.com/v4/" });
+
+export default function Home({ data: { launch } }) {
   return (
     <div className={styles.container}>
       <Image src={logo} alt="SpaceX Logo" height={20} />
-      {!loading ? (
+      {launch?.date_utc ? (
         <>
-          {launch.upcoming ? (
-            <CountdownTimer date={launch.date} />
+          {launch.date_utc ? (
+            <CountdownTimer date={launch.date_utc} />
           ) : (
             "No upcoming launches"
           )}
@@ -25,7 +28,7 @@ export default function Home({ loading, data: { launch } }) {
           <div className={styles.missionInfo}>
             <p className={styles.missionName}>{launch.name}</p>
             <p className={styles.missionFlight}>
-              Flight Number {launch.flightNumber}
+              Flight Number {launch.flight_number}
             </p>
           </div>
         </>
@@ -38,19 +41,18 @@ export default function Home({ loading, data: { launch } }) {
 
 export async function getStaticProps() {
   const client = new ApolloClient({
-    uri: "http://localhost:4000/",
+    link: restLink,
     cache: new InMemoryCache(),
   });
 
-  const { data, loading, error } = await client.query({
+  const { data } = await client.query({
     query: gql`
-      query Query {
-        launch {
-          upcoming
+      query GetLaunchDetails {
+        launch @rest(type: "Launches", path: "launches/next") {
           rocket
-          date
+          date_utc
           name
-          flightNumber
+          flight_number
         }
       }
     `,
@@ -58,7 +60,6 @@ export async function getStaticProps() {
 
   return {
     props: {
-      loading,
       data,
     },
   };
