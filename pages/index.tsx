@@ -2,6 +2,7 @@ import styles from "../styles/Home.module.css";
 import LoadingSpinner from "../components/LoadingSpinner";
 import CountdownTimer from "../components/CountdownTimer";
 import Image from "next/image";
+import Link  from "next/link";
 import Rocket from "../components/Rocket";
 import logo from "../assets/spacex-logo.svg";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
@@ -16,20 +17,25 @@ type LaunchType = {
       date_utc: string;
       rocket: string;
       flight_number: number;
+      links: {
+        webcast: string;
+      };
     };
   };
 };
 
+
 export default function Home({ data: { launch } }: LaunchType): JSX.Element {
+  console.log('launch: ', launch.links.webcast);
   return (
     <div className={styles.container}>
       <Image src={logo} alt="SpaceX Logo" height={20} />
       {launch?.date_utc ? (
         <>
-          {launch.date_utc ? (
+          {launch?.links.webcast ? (
+            <Link href={launch.links.webcast} target="_blank" >View Launch</Link>
+            ) : (
             <CountdownTimer date={launch.date_utc} />
-          ) : (
-            "No upcoming launches"
           )}
           <Rocket id={launch.rocket} />
           <div className={styles.view}>
@@ -63,6 +69,7 @@ export async function getStaticProps() {
           date_utc
           name
           flight_number
+          links
         }
       }
     `,
