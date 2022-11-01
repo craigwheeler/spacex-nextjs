@@ -1,5 +1,4 @@
 import styles from "../styles/Home.module.css";
-import { useState, useEffect } from "react";
 import LoadingSpinner from "../components/LoadingSpinner";
 import CountdownTimer from "../components/CountdownTimer";
 import Image from "next/image";
