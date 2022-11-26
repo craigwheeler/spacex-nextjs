@@ -10,13 +10,17 @@ import { RestLink } from "apollo-link-rest";
 
 const restLink = new RestLink({ uri: "https://lldev.thespacedevs.com" });
 
-type LaunchType = {
-  data: {
-    launch: {
-      results: any;
-    };
-  };
-};
+interface UpcomingLaunchType {
+  launch_service_provider: { id: number };
+  window_start: string;
+  rocket: { id: number };
+  name: string;
+  pad: { location: { name: string } };
+}
+
+interface LaunchType {
+  data: { launch: { results: UpcomingLaunchType[] } };
+}
 
 export default function Home({ data: { launch } }: LaunchType): JSX.Element {
   // SpaceX launch service provider id
