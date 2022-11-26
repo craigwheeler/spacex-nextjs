@@ -5,10 +5,14 @@ import falconHeavy from "../assets/falcon-heavy.png";
 import starShip from "../assets/starship.png";
 
 const Rocket = ({ id }) => {
+  // TODO: verify the correct id's used for each rocket
+  const starShipId = 100;
+  const falconHeavyId = 200;
+
   switch (id) {
-    case "5e9d0d96eda699382d09d1ee":
+    case starShipId:
       return <Image src={starShip} height={350} alt="Starship" />;
-    case "5e9d0d95eda69974db09d1ed":
+    case falconHeavyId:
       return <Image src={falconHeavy} height={350} alt="Falcon Heavy" />;
     default:
       return <Image src={falcon9} height={350} alt="Falcon 9" />;
