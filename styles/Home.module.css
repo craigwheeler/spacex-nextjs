@@ -121,10 +121,6 @@
 
 /* custom styles */
 
-.view {
-  display: flex;
-}
-
 .missionInfo {
   text-align: center;
   color: #999;

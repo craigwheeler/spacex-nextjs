@@ -8,43 +8,42 @@ import logo from "../assets/spacex-logo.svg";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { RestLink } from "apollo-link-rest";
 
-const restLink = new RestLink({ uri: "https://api.spacexdata.com/latest/" });
+const restLink = new RestLink({ uri: "https://lldev.thespacedevs.com" });
 
 type LaunchType = {
   data: {
     launch: {
-      name: string;
-      date_utc: string;
-      rocket: string;
-      flight_number: number;
-      links: {
-        webcast: string;
-      };
+      results: any;
     };
   };
 };
 
 export default function Home({ data: { launch } }: LaunchType): JSX.Element {
+  // SpaceX launch service provider id
+  const spacexId = 121;
+
+  // filter out launches where launch_service_provider is SpaceX
+  const filteredLaunches = launch.results.filter(
+    ({ launch_service_provider }) => launch_service_provider.id === spacexId
+  );
+
+  // get the next launch
+  const [upcomingLaunch] = filteredLaunches;
+
+  // get launch start date
+  const launchDate = new Date(upcomingLaunch.window_start);
+
   return (
     <div className={styles.container}>
       <Image src={logo} alt="SpaceX Logo" height={20} />
-      {launch?.date_utc ? (
+      {upcomingLaunch ? (
         <>
-          {launch?.links.webcast ? (
-            <Link href={launch.links.webcast} target="_blank">
-              View Launch
-            </Link>
-          ) : (
-            <CountdownTimer date={launch.date_utc} />
-          )}
-          <Rocket id={launch.rocket} />
-          <div className={styles.view}>
-            <div className={styles.rocket} id={launch.rocket} />
-          </div>
+          <CountdownTimer date={upcomingLaunch.window_start} />
+          <Rocket id={upcomingLaunch.rocket.id} />
           <div className={styles.missionInfo}>
-            <p className={styles.missionName}>{launch.name}</p>
+            <p className={styles.missionName}>{upcomingLaunch.name}</p>
             <p className={styles.missionFlight}>
-              Flight Number {launch.flight_number}
+              Location: {upcomingLaunch.pad.location.name}
             </p>
           </div>
         </>
@@ -64,12 +63,8 @@ export async function getStaticProps() {
   const { data } = await client.query({
     query: gql`
       query GetLaunchDetails {
-        launch @rest(type: "Launches", path: "launches/next") {
-          rocket
-          date_utc
-          name
-          flight_number
-          links
+        launch @rest(type: "Launch", path: "/2.2.0/launch/upcoming/") {
+          results
         }
       }
     `,
