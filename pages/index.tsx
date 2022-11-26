@@ -23,31 +23,28 @@ interface LaunchType {
 }
 
 export default function Home({ data: { launch } }: LaunchType): JSX.Element {
-  // SpaceX launch service provider id
-  const spacexId = 121;
-
-  // filter out launches where launch_service_provider is SpaceX
-  const filteredLaunches = launch.results.filter(
-    ({ launch_service_provider }) => launch_service_provider.id === spacexId
+  // filter launches by upcoming launch windows
+  const upcomingLaunches = launch.results.filter(
+    ({ status, window_start }) =>
+      status.abbrev === "Go" && new Date() < new Date(window_start)
   );
 
-  // get the next launch
-  const [upcomingLaunch] = filteredLaunches;
+  console.log("upcomingLaunches: ", upcomingLaunches);
 
-  // get launch start date
-  const launchDate = new Date(upcomingLaunch.window_start);
+  // get the next launch
+  const [nextLaunch] = upcomingLaunches;
 
   return (
     <div className={styles.container}>
-      <Image src={logo} alt="SpaceX Logo" height={25} />
-      {upcomingLaunch ? (
+      {/* <Image src={logo} alt="SpaceX Logo" height={25} /> */}
+      {nextLaunch ? (
         <>
-          <CountdownTimer date={upcomingLaunch.window_start} />
-          <Rocket id={upcomingLaunch.rocket.id} />
+          <CountdownTimer date={nextLaunch.window_start} />
+          <Rocket id={nextLaunch.rocket.id} />
           <div className={styles.missionInfo}>
-            <p className={styles.missionName}>{upcomingLaunch.name}</p>
+            <p className={styles.missionName}>{nextLaunch.name}</p>
             <p className={styles.missionFlight}>
-              Location: {upcomingLaunch.pad.location.name}
+              Location: {nextLaunch.pad.location.name}
             </p>
           </div>
         </>
