@@ -16,6 +16,7 @@ interface UpcomingLaunchType {
   rocket: { id: number };
   name: string;
   pad: { location: { name: string } };
+  status: string;
 }
 
 interface LaunchType {
