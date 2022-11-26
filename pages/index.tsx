@@ -8,7 +8,7 @@ import logo from "../assets/spacex-logo.svg";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { RestLink } from "apollo-link-rest";
 
-const restLink = new RestLink({ uri: "https://ll.thespacedevs.com" });
+const restLink = new RestLink({ uri: "https://lldev.thespacedevs.com" });
 
 interface UpcomingLaunchType {
   launch_service_provider: { id: number };
@@ -16,7 +16,7 @@ interface UpcomingLaunchType {
   rocket: { id: number };
   name: string;
   pad: { location: { name: string } };
-  status: string;
+  status: { abbrev: string };
 }
 
 interface LaunchType {
