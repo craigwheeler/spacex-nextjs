@@ -39,7 +39,7 @@ export default function Home({ data: { launch } }: LaunchType): JSX.Element {
 
   return (
     <div className={styles.container}>
-      <Image src={logo} alt="SpaceX Logo" height={20} />
+      <Image src={logo} alt="SpaceX Logo" height={25} />
       {upcomingLaunch ? (
         <>
           <CountdownTimer date={upcomingLaunch.window_start} />

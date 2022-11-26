@@ -1,9 +1,9 @@
 .container {
   min-height: 100vh;
-  padding: 1rem;
+  padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   color: #999;
   background-color: #000;
@@ -128,7 +128,6 @@
 
 .missionName {
   font-size: 20px;
-  margin: 5px;
 }
 .missionFlight {
   font-size: 12px;
