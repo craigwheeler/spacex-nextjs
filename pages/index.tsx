@@ -8,12 +8,12 @@ import logo from "../assets/logo.png";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { RestLink } from "apollo-link-rest";
 
-const restLink = new RestLink({ uri: "https://ll.thespacedevs.com" });
+const restLink = new RestLink({ uri: "https://lldev.thespacedevs.com" });
 
 interface UpcomingLaunchType {
   launch_service_provider: { id: number };
   window_start: string;
-  rocket: { id: number };
+  rocket: { id: number; configuration: { family: string } };
   name: string;
   pad: { location: { name: string } };
   status: { abbrev: string };
