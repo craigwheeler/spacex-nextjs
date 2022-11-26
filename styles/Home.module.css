@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  padding: 2rem 1rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -119,11 +119,10 @@
   }
 }
 
-/* custom styles */
-
 .missionInfo {
   text-align: center;
   color: #999;
+  padding: 0 20px;
 }
 
 .missionName {

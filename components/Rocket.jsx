@@ -6,28 +6,35 @@ import starShip from "../assets/starship.png";
 import PSLV from "../assets/pslv.png";
 import longMarch from "../assets/cn_long_march.png";
 import soyuz from "../assets/soyuz.png";
+import terran from "../assets/terran-01.png";
+import launcherOne from "../assets/launcher-one.png";
+import zhuque from "../assets/zhuque-2.png";
+import electron from "../assets/electron.png";
 
 const Rocket = ({ id }) => {
-  const ROCKET_IMG_SIZE = 400;
-  const STARSHIP_ROCKET_ID = 100;
-  const FALCON_HEAVY_ROCKET_ID = 200;
-  const PSLV_ROCKET_ID = 2356;
-  const LONG_MARCH_ROCKET_ID = 7704;
-  const SOYUZ_ROCKET_ID = 7706;
+  const imgHeight = 450;
 
-  switch (id) {
-    case STARSHIP_ROCKET_ID:
-      return <Image src={starShip} height={ROCKET_IMG_SIZE} alt="rocket" />;
-    case FALCON_HEAVY_ROCKET_ID:
-      return <Image src={falconHeavy} height={ROCKET_IMG_SIZE} alt="rocket" />;
-    case PSLV_ROCKET_ID:
-      return <Image src={PSLV} height={ROCKET_IMG_SIZE} alt="rocket" />;
-    case LONG_MARCH_ROCKET_ID:
-      return <Image src={longMarch} height={ROCKET_IMG_SIZE} alt="rocket" />;
-    case SOYUZ_ROCKET_ID:
-      return <Image src={soyuz} height={ROCKET_IMG_SIZE} alt="rocket" />;
+  switch (true) {
+    case id.toLowerCase().includes("starship"):
+      return <Image src={starShip} height={imgHeight} alt="rocket" />;
+    case id.toLowerCase().includes("falcon heavy"):
+      return <Image src={falconHeavy} height={imgHeight} alt="rocket" />;
+    case id.toLowerCase().includes("pslv"):
+      return <Image src={PSLV} height={imgHeight} alt="rocket" />;
+    case id.toLowerCase().includes("long march"):
+      return <Image src={longMarch} height={imgHeight} alt="rocket" />;
+    case id.toLowerCase().includes("terran"):
+      return <Image src={terran} height={imgHeight} alt="rocket" />;
+    case id.toLowerCase().includes("launcher one"):
+      return <Image src={launcherOne} height={imgHeight} alt="rocket" />;
+    case id.toLowerCase().includes("zhuque"):
+      return <Image src={zhuque} height={imgHeight} alt="rocket" />;
+    case id.toLowerCase().includes("electron"):
+      return <Image src={electron} height={imgHeight} alt="rocket" />;
+    case id.toLowerCase().includes("soyuz"):
+      return <Image src={soyuz} height={imgHeight} alt="rocket" />;
     default:
-      return <Image src={falcon9} height={ROCKET_IMG_SIZE} alt="rocket" />;
+      return <Image src={falcon9} height={imgHeight} alt="rocket" />;
   }
 };
 

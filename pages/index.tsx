@@ -4,7 +4,7 @@ import CountdownTimer from "../components/CountdownTimer";
 import Image from "next/image";
 import Link from "next/link";
 import Rocket from "../components/Rocket";
-import logo from "../assets/spacex-logo.svg";
+import logo from "../assets/logo.png";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { RestLink } from "apollo-link-rest";
 
@@ -30,22 +30,20 @@ export default function Home({ data: { launch } }: LaunchType): JSX.Element {
       status.abbrev === "Go" && new Date() < new Date(window_start)
   );
 
-  console.log("upcomingLaunches: ", upcomingLaunches);
-
   // get the next launch
   const [nextLaunch] = upcomingLaunches;
 
   return (
     <div className={styles.container}>
-      {/* <Image src={logo} alt="SpaceX Logo" height={25} /> */}
+      {/* <Image src={logo} alt="logo" height={50} /> */}
       {nextLaunch ? (
         <>
           <CountdownTimer date={nextLaunch.window_start} />
-          <Rocket id={nextLaunch.rocket.id} />
+          <Rocket id={nextLaunch.rocket.configuration.family} />
           <div className={styles.missionInfo}>
             <p className={styles.missionName}>{nextLaunch.name}</p>
             <p className={styles.missionFlight}>
-              Location: {nextLaunch.pad.location.name}
+              {nextLaunch.pad.location.name}
             </p>
           </div>
         </>
