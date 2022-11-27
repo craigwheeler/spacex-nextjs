@@ -12,7 +12,7 @@ import zhuque from "../assets/zhuque-2.png";
 import electron from "../assets/electron.png";
 
 const Rocket = ({ id }) => {
-  const imgHeight = 450;
+  const imgHeight = 500;
 
   switch (true) {
     case id.toLowerCase().includes("starship"):

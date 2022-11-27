@@ -14,7 +14,8 @@
     "next-pwa": "^5.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-spinners": "^0.13.6"
+    "react-spinners": "^0.13.6",
+    "tsc-check": "^0.0.4"
   },
   "devDependencies": {
     "@types/node": "17.0.4",
