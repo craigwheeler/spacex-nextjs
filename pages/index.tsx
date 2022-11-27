@@ -35,11 +35,6 @@ const Webcast = ({ launch }: any) => {
     <div className={styles.webcast}>
       <h2>Mission Info</h2>
       <p className={styles.missionDetails}>
-        <div>Yaogan 36 Group 03</div>
-        <div>Government/Top Secret</div>
-        <div>3 Chinese military reconnaissance satellites.</div>
-      </p>
-      <p>
         <div>{vidURLs?.title}</div>
         <div>{vidURLs?.type}</div>
         <div>{vidURLs?.description}</div>
