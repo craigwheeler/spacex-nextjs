@@ -33,6 +33,13 @@ export default function Home({ data: { launch } }: LaunchType): JSX.Element {
   // get the next launch
   const [nextLaunch] = upcomingLaunches;
 
+  // get all launch results filtered by spacex
+  const spacexLaunches = launch.results.filter(
+    ({ launch_service_provider }) => launch_service_provider.id === 121
+  );
+
+  console.log("spacexLaunches: ", spacexLaunches);
+
   return (
     <div className={styles.container}>
       {/* <Image src={logo} alt="logo" height={50} /> */}
