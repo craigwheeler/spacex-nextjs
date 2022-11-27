@@ -17,13 +17,19 @@ interface UpcomingLaunchType {
   name: string;
   pad: { location: { name: string } };
   status: { abbrev: string };
+  vidURLs: {
+    title: string;
+    type: string;
+    description: string;
+    priority: { url: string };
+  };
 }
 
 interface LaunchType {
   data: { launch: { results: UpcomingLaunchType[] } };
 }
 
-const Webcast = ({ launch }) => {
+const Webcast = ({ launch }: any) => {
   const { vidURLs } = launch;
   return (
     <div className={styles.webcast}>
