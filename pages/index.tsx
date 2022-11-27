@@ -29,15 +29,28 @@ interface LaunchType {
   data: { launch: { results: UpcomingLaunchType[] } };
 }
 
+const MissionDetails = ({ launch }: any) => {
+  const { mission } = launch;
+
+  return (
+    <div className={styles.webcast}>
+      <p className={styles.missionDetails}>
+        <h4 className={styles.missionName}>{mission?.name}</h4>
+        <h5>{mission?.type}</h5>
+        <p className={styles.missionDescription}>{mission?.description}</p>
+      </p>
+    </div>
+  );
+};
+
 const Webcast = ({ launch }: any) => {
   const { vidURLs } = launch;
   return (
     <div className={styles.webcast}>
-      <h2>Mission Info</h2>
       <p className={styles.missionDetails}>
-        <div>{vidURLs?.title}</div>
-        <div>{vidURLs?.type}</div>
-        <div>{vidURLs?.description}</div>
+        <h4 className={styles.missionName}>{vidURLs?.title}</h4>
+        <h5>{vidURLs?.type}</h5>
+        <p className={styles.missionDescription}>{vidURLs?.description}</p>
       </p>
       <p>
         Watch the launch live on <a href={vidURLs?.priority?.url}>YouTube</a>
@@ -69,13 +82,16 @@ export default function Home({ data: { launch } }: LaunchType): JSX.Element {
           <CountdownTimer date={nextLaunch.window_start} />
           <div className={styles.rocketContainer}>
             <Rocket id={nextLaunch.rocket.configuration.family} />
-            {nextLaunch?.vidURLs ? <Webcast launch={nextLaunch} /> : null}
+            {nextLaunch?.vidURLs ? (
+              <Webcast launch={nextLaunch} />
+            ) : (
+              <MissionDetails launch={nextLaunch} />
+            )}
           </div>
           <div className={styles.missionInfo}>
             <p className={styles.missionName}>{nextLaunch.name}</p>
             <p className={styles.missionFlight}>
               {nextLaunch.pad.location.name}
-              <br />
             </p>
           </div>
         </>

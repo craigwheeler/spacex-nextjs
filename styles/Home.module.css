@@ -125,7 +125,7 @@
 }
 
 .missionName {
-  font-size: 20px;
+  line-height: 1.5;
 }
 .missionFlight {
   font-size: 12px;
@@ -160,6 +160,7 @@
 
 .rocketContainer {
   display: flex;
+  align-items: center;
 }
 
 .webcast {
@@ -173,6 +174,14 @@
   color: red;
 }
 
-.missionDetails div {
+.missionDetails {
   line-height: 1.5;
+}
+
+.missionName {
+  font-size: 16px;
+}
+
+.missionDescription {
+  font-size: 14px;
 }
