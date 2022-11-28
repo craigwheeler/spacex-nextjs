@@ -34,24 +34,21 @@ const MissionDetails = ({ launch }: any) => {
 
   return (
     <div className={styles.webcast}>
-      <p className={styles.missionDetails}>
-        <h4 className={styles.missionName}>{mission?.name}</h4>
-        <h5>{mission?.type}</h5>
-        <p className={styles.missionDescription}>{mission?.description}</p>
-      </p>
+      <h4 className={styles.missionName}>{mission?.name}</h4>
+      <h5>{mission?.type}</h5>
+      <p className={styles.missionDescription}>{mission?.description}</p>
     </div>
   );
 };
 
 const Webcast = ({ launch }: any) => {
   const { vidURLs } = launch;
+
   return (
     <div className={styles.webcast}>
-      <p className={styles.missionDetails}>
-        <h4 className={styles.missionName}>{vidURLs?.title}</h4>
-        <h5>{vidURLs?.type}</h5>
-        <p className={styles.missionDescription}>{vidURLs?.description}</p>
-      </p>
+      <h4 className={styles.missionName}>{vidURLs?.title}</h4>
+      <h5>{vidURLs?.type}</h5>
+      <p className={styles.missionDescription}>{vidURLs?.description}</p>
       <p>
         Watch the launch live on <a href={vidURLs?.priority?.url}>YouTube</a>
       </p>

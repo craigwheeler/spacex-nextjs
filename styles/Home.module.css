@@ -167,15 +167,12 @@
   margin-left: 20px;
   display: flex;
   flex-direction: column;
+  line-height: 1.5;
 }
 
 .webcast a {
   text-decoration: none;
   color: red;
-}
-
-.missionDetails {
-  line-height: 1.5;
 }
 
 .missionName {
