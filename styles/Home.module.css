@@ -161,6 +161,7 @@
 .rocketContainer {
   display: flex;
   align-items: center;
+  max-width: 400px;
 }
 
 .webcast {
