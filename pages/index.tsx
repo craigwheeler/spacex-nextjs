@@ -103,6 +103,19 @@ export async function getStaticProps() {
   const client = new ApolloClient({
     link: restLink,
     cache: new InMemoryCache(),
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: "cache-and-network",
+        errorPolicy: "ignore",
+      },
+      query: {
+        fetchPolicy: "network-only",
+        errorPolicy: "all",
+      },
+      mutate: {
+        errorPolicy: "all",
+      },
+    },
   });
 
   const { data } = await client.query({
