@@ -41,6 +41,11 @@ const MissionDetails = ({ launch }: any) => {
         <div>{mission?.type}</div>
         <div>{mission?.orbit?.name}</div>
       </div>
+
+      <div className={styles.missionInfo}>
+        <p className={styles.missionNameFooter}>{launch.name}</p>
+        <p className={styles.missionFlight}>{launch.pad.location.name}</p>
+      </div>
     </div>
   );
 };
@@ -88,12 +93,6 @@ export default function Home({ data: { launch } }: LaunchType): JSX.Element {
             ) : (
               <MissionDetails launch={nextLaunch} />
             )}
-          </div>
-          <div className={styles.missionInfo}>
-            <p className={styles.missionNameFooter}>{nextLaunch.name}</p>
-            <p className={styles.missionFlight}>
-              {nextLaunch.pad.location.name}
-            </p>
           </div>
         </>
       ) : (

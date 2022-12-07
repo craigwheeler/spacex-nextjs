@@ -115,8 +115,8 @@
 }
 
 .missionInfo {
-  text-align: center;
-  color: #999;
+  text-align: left;
+  color: #686777;
 }
 
 .missionName {
@@ -134,6 +134,7 @@
   max-width: 500px;
   width: 100%;
   color: #fff;
+  margin-bottom: 16px;
 }
 
 .time {
@@ -160,7 +161,7 @@
 }
 
 .webcast {
-  margin-left: 20px;
+  margin-left: 50px;
   display: flex;
   flex-direction: column;
   line-height: 1.5;
