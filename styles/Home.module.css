@@ -1,17 +1,12 @@
 .container {
   min-height: 100vh;
-  padding: 3rem;
+  padding: 3rem 5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   color: #999;
-  background-color: #000;
-  background: radial-gradient(
-    56.04% 44.43% at 50% 100%,
-    rgb(22, 22, 22) 0%,
-    rgb(0, 0, 0) 100%
-  );
+  background-color: #04021d;
 }
 
 .footer {
@@ -177,9 +172,22 @@
 }
 
 .missionName {
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.5;
+  color: #e6e9f3;
+}
+.missionNameFooter {
+  font-family: sans-serif;
+  font-weight: 600;
   font-size: 16px;
+  line-height: 1.5;
+  color: #e6e9f3;
 }
 
 .missionDescription {
-  font-size: 14px;
+  font-weight: 400;
+  font-size: 16px;
+  color: "#686777";
 }

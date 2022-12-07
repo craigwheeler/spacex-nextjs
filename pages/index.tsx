@@ -35,7 +35,7 @@ const MissionDetails = ({ launch }: any) => {
   return (
     <div className={styles.webcast}>
       <h4 className={styles.missionName}>{mission?.name}</h4>
-      <h5>{mission?.type}</h5>
+      {/* <h5>{mission?.type}</h5> */}
       <p className={styles.missionDescription}>{mission?.description}</p>
     </div>
   );
@@ -86,7 +86,7 @@ export default function Home({ data: { launch } }: LaunchType): JSX.Element {
             )}
           </div>
           <div className={styles.missionInfo}>
-            <p className={styles.missionName}>{nextLaunch.name}</p>
+            <p className={styles.missionNameFooter}>{nextLaunch.name}</p>
             <p className={styles.missionFlight}>
               {nextLaunch.pad.location.name}
             </p>
