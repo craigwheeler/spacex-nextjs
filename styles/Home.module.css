@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  padding: 3rem 4rem;
+  padding: 2rem 3rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -161,7 +161,7 @@
 }
 
 .webcast {
-  margin-left: 50px;
+  margin-left: 25px;
   display: flex;
   flex-direction: column;
   line-height: 1.5;
