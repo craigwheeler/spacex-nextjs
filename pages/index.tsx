@@ -30,13 +30,17 @@ interface LaunchType {
 }
 
 const MissionDetails = ({ launch }: any) => {
-  const { mission } = launch;
+  const { mission, launch_service_provider } = launch;
 
   return (
     <div className={styles.webcast}>
-      <h4 className={styles.missionName}>{mission?.name}</h4>
-      {/* <h5>{mission?.type}</h5> */}
-      <p className={styles.missionDescription}>{mission?.description}</p>
+      <div className={styles.missionName}>{mission?.name}</div>
+      <div className={styles.missionDescription}>{mission?.description}</div>
+      <div className={styles.missionDetails}>
+        <div>{launch_service_provider?.name}</div>
+        <div>{mission?.type}</div>
+        <div>{mission?.orbit?.name}</div>
+      </div>
     </div>
   );
 };
