@@ -27,7 +27,7 @@ interface LaunchType {
   data: { launch: { results: UpcomingLaunchType[] } };
 }
 
-const MissionDetails = ({ launch }: LaunchType) => {
+const MissionDetails = ({ launch }: any) => {
   const { mission, launch_service_provider } = launch;
 
   return (
