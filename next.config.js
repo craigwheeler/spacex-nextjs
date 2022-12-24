@@ -4,5 +4,7 @@ const withPWA = require("next-pwa")({
 });
 
 module.exports = withPWA({
-  // config
+  env: {
+    BASE_URL: process.env.BASE_URL,
+  },
 });

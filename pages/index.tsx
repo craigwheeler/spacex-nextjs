@@ -5,10 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Rocket from "../components/Rocket";
 import logo from "../assets/logo.png";
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-import { RestLink } from "apollo-link-rest";
-
-const restLink = new RestLink({ uri: process.env.BASE_URL });
+import { useQuery } from "react-query";
+import axios from "axios";
 
 interface UpcomingLaunchType {
   launch_service_provider: { id: number };
@@ -29,7 +27,7 @@ interface LaunchType {
   data: { launch: { results: UpcomingLaunchType[] } };
 }
 
-const MissionDetails = ({ launch }: any) => {
+const MissionDetails = ({ launch }: LaunchType) => {
   const { mission, launch_service_provider } = launch;
 
   return (
@@ -65,7 +63,29 @@ const Webcast = ({ launch }: any) => {
   );
 };
 
-export default function Home({ data: { launch } }: LaunchType): JSX.Element {
+async function fetchLaunchData() {
+  const { data } = await axios.get(
+    `${process.env.BASE_URL}/2.2.0/launch/upcoming/`
+  );
+
+  return data;
+}
+
+export default function Home(): JSX.Element {
+  const {
+    data: launch,
+    error,
+    isError,
+    isLoading,
+  } = useQuery("launch", fetchLaunchData);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (isError) {
+    return <div>Error! {error.message}</div>;
+  }
+
   // filter launches by upcoming launch windows
   const upcomingLaunches = launch.results.filter(
     ({ status, window_start }) =>
@@ -100,40 +120,4 @@ export default function Home({ data: { launch } }: LaunchType): JSX.Element {
       )}
     </div>
   );
-}
-
-export async function getStaticProps() {
-  const client = new ApolloClient({
-    link: restLink,
-    cache: new InMemoryCache(),
-    defaultOptions: {
-      watchQuery: {
-        fetchPolicy: "cache-and-network",
-        errorPolicy: "ignore",
-      },
-      query: {
-        fetchPolicy: "network-only",
-        errorPolicy: "all",
-      },
-      mutate: {
-        errorPolicy: "all",
-      },
-    },
-  });
-
-  const { data } = await client.query({
-    query: gql`
-      query GetLaunchDetails {
-        launch @rest(type: "Launch", path: "/2.2.0/launch/upcoming/") {
-          results
-        }
-      }
-    `,
-  });
-
-  return {
-    props: {
-      data,
-    },
-  };
 }
