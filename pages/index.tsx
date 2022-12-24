@@ -80,15 +80,12 @@ export default function Home(): JSX.Element {
   } = useQuery("launch", fetchLaunchData);
 
   if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  if (isError) {
-    return <div>Error! {error.message}</div>;
+    return <LoadingSpinner />;
   }
 
   // filter launches by upcoming launch windows
   const upcomingLaunches = launch.results.filter(
-    ({ status, window_start }) =>
+    ({ status, window_start }: any) =>
       status.abbrev === "Go" && new Date() < new Date(window_start)
   );
 
@@ -97,7 +94,7 @@ export default function Home(): JSX.Element {
 
   // get all launch results filtered by spacex
   const spacexLaunches = launch.results.filter(
-    ({ launch_service_provider }) => launch_service_provider.id === 121
+    ({ launch_service_provider }: any) => launch_service_provider.id === 121
   );
 
   return (
